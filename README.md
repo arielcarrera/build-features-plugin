@@ -1,2 +1,2 @@
 # build-features-plugin
-Gradle plugin for manage dependencies as a platform
+Gradle plugin for managing dependencies as a platform
