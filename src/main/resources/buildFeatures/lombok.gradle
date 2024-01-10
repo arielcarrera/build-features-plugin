@@ -1,8 +1,0 @@
-package buildFeatures
-
-feature('lombok', 'Lombok') {
-    dependency('compileOnly', 'org.projectlombok:lombok')
-    dependency('annotationProcessor', 'org.projectlombok:lombok')
-    dependency('testCompileOnly', 'org.projectlombok:lombok')
-    dependency('testAnnotationProcessor', 'org.projectlombok:lombok')
-}

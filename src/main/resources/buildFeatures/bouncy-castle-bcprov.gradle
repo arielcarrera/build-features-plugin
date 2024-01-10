@@ -1,5 +1,0 @@
-package buildFeatures
-
-feature('bouncyCastleBcprov', 'Bouncy Castle Bcprov') {
-    implementation 'org.bouncycastle:bcprov-jdk18on:%BOUNCY_CASTLE_VERSION', 'bouncyCastleVersion'
-}

@@ -1,5 +1,0 @@
-package buildFeatures
-
-feature('embeddedMongoDb', 'FlapDoodle Embedded MongoDB') {
-    testImplementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo:%EMBED_MONGO_VERSION', 'embeddedMongoDbVersion'
-}

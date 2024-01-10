@@ -1,5 +1,0 @@
-package buildFeatures
-
-feature('junit', 'Junit 5') {
-    testImplementation "junit:junit"
-}

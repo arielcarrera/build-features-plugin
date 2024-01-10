@@ -1,5 +1,0 @@
-package buildFeatures
-
-feature('jacksonDatabind', 'Jackson Databind') {
-    implementation 'com.fasterxml.jackson.core:jackson-databind'
-}

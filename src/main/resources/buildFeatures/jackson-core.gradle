@@ -1,5 +1,0 @@
-package buildFeatures
-
-feature('jacksonCore', 'Jackson Core') {
-    implementation 'com.fasterxml.jackson.core:jackson-core'
-}

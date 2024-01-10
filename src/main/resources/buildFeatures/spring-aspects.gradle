@@ -1,5 +1,0 @@
-package buildFeatures
-
-feature('springAspects', 'Spring Aspects') {
-    implementation('org.springframework:spring-aspects')
-}

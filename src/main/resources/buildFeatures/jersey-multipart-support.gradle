@@ -1,5 +1,0 @@
-package buildFeatures
-
-feature('jerseyMultipartSupport', 'Jersey Media Multipart') {
-    implementation 'org.glassfish.jersey.media:jersey-media-multipart'
-}

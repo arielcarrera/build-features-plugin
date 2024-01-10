@@ -1,9 +1,0 @@
-package buildFeatures
-
-feature('mapstruct', 'Mapstruct') {
-    implementation("org.mapstruct:mapstruct:%MAPSTRUCT_VERSION", 'mapstructVersion')
-    dependency('annotationProcessor', "org.mapstruct:mapstruct-processor:%MAPSTRUCT_VERSION", 'mapstructVersion')
-    dependency('annotationProcessor', "org.projectlombok:lombok-mapstruct-binding:%MAPSTRUCT_LOMBOK_BINDING_VERSION", 'mapstructLombokBindingVersion') {
-        conditionalOnFeature('lombok')
-    }
-}

@@ -1,5 +1,0 @@
-package buildFeatures
-
-feature('twilio', 'Twilio') {
-    implementation('com.twilio.sdk:twilio:%TWILIO_VERSION', 'twilioVersion')
-}

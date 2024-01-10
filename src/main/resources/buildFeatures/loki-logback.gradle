@@ -1,5 +1,0 @@
-package buildFeatures
-
-feature('lokiLogback', 'Loki Logback Appender') {
-    implementation("com.github.loki4j:loki-logback-appender:%LOKI_LOGBACK_VERSION", 'lokiLogbackVersion')
-}

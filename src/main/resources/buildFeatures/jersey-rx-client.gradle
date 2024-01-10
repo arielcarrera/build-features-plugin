@@ -1,5 +1,0 @@
-package buildFeatures
-
-feature('jerseyRxClient', 'Jersey RX Client') {
-    implementation 'org.glassfish.jersey.ext.rx:jersey-rx-client-rxjava2'
-}

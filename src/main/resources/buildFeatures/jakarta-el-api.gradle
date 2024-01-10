@@ -1,5 +1,0 @@
-package buildFeatures
-
-feature('jakartaElApi', 'Jakarta EL Api') {
-    implementation('jakarta.el:jakarta.el-api:%JAKARTA_EL_VERSION', 'jakartaElApiVersion')
-}

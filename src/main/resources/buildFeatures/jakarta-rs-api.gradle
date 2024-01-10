@@ -1,5 +1,0 @@
-package buildFeatures
-
-feature('jakartaRsApi', 'Jakarta RS Api') {
-    implementation 'jakarta.ws.rs:jakarta.ws.rs-api'
-}

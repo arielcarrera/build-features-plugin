@@ -1,5 +1,0 @@
-package buildFeatures
-
-feature('mongoDbBson', 'MongoDb BSON') {
-    implementation 'org.mongodb:bson:%MONGO_DB_VERSION', 'mongodbVersion'
-}

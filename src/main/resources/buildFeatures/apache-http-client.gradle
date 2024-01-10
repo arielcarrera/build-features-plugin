@@ -1,5 +1,0 @@
-package buildFeatures
-
-feature('apacheHttpClient', 'Apache Components Http Client 5') {
-    implementation 'org.apache.httpcomponents.client5:httpclient5'
-}

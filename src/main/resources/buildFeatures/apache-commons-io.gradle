@@ -1,5 +1,0 @@
-package buildFeatures
-
-feature('apacheCommonsIo', 'Apache Commons IO') {
-    implementation('commons-io:commons-io:%COMMONS_IO_VERSION', 'commonsIoVersion')
-}

@@ -1,5 +1,0 @@
-package buildFeatures
-
-feature('micrometerObservation', 'Micrometer observation') {
-    implementation 'io.micrometer:micrometer-observation'
-}

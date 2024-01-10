@@ -1,5 +1,0 @@
-package buildFeatures
-
-feature('springdocWebfluxUi', 'Springdoc OpenApi Webflux UI') {
-    implementation 'org.springdoc:springdoc-openapi-starter-webflux-ui:%SPRINGDOC_VERSION', 'springdocVersion'
-}

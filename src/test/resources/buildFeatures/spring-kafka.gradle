@@ -4,6 +4,6 @@ feature('springKafka', 'Spring Kafka') {
     implementation('org.springframework.kafka:spring-kafka') {
         exclude('io.zipkin.brave', 'brave-instrumentation-kafka-clients')
     }
-    implementation('io.zipkin.brave:brave-instrumentation-kafka-clients:%ZIPKIN_VERSION', 'zipkinVersion')
+    implementation('io.zipkin.brave:brave-instrumentation-kafka-clients:%ZIPKIN_BRAVE_VERSION', 'zipkinVersion')
     testImplementation('io.micrometer:micrometer-tracing-test')
 }

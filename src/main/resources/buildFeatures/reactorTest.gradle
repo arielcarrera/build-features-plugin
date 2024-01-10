@@ -1,5 +1,0 @@
-package buildFeatures
-
-feature('reactorTest', 'Project Reactor Test') {
-    testImplementation 'io.projectreactor:reactor-test'
-}

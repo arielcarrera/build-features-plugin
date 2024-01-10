@@ -1,5 +1,0 @@
-package buildFeatures
-
-feature('jedis', 'Redis Client Jedis') {
-    implementation 'redis.clients:jedis'
-}

@@ -1,6 +1,0 @@
-package buildFeatures
-
-feature('jerseyJaxb', 'Jersey JAXB') {
-    implementation 'org.glassfish.jaxb:jaxb-runtime'
-    implementation 'jakarta.xml.bind:jakarta.xml.bind-api'
-}

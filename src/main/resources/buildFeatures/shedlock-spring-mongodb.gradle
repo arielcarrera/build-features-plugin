@@ -1,6 +1,0 @@
-package buildFeatures
-
-feature('shedlockSpringMongoDb', 'Shedlock Spring MongoDb') {
-    implementation('net.javacrumbs.shedlock:shedlock-spring:%SHEDLOCK_VERSION', 'shedlockVersion')
-    implementation('net.javacrumbs.shedlock:shedlock-provider-mongo:%SHEDLOCK_VERSION', 'shedlockVersion')
-}
