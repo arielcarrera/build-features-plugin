@@ -1,0 +1,5 @@
+package buildFeatures
+
+feature('jakartaXmlBindApi', 'Jakarta XML Bind Api') {
+    implementation 'jakarta.xml.bind:jakarta.xml.bind-api'
+}

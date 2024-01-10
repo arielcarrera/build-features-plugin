@@ -1,0 +1,5 @@
+package buildFeatures
+
+feature('testcontainers', 'Testcontainers') {
+    testImplementation("org.testcontainers:testcontainers:%TESTCONTAINERS_VERSION", "testcontainersVersion")
+}

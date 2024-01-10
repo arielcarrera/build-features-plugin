@@ -1,0 +1,5 @@
+package buildFeatures
+
+feature('springCloudGateway', 'Spring Cloud Gateway') {
+    implementation('org.springframework.cloud:spring-cloud-starter-gateway')
+}

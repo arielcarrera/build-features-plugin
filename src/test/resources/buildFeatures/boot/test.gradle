@@ -1,0 +1,8 @@
+package buildFeatures.boot
+
+feature('featureId 3', 'Feature Name 3', 'versionProperty 3') {
+    implementation('12345:55677:123')
+    dependency('implementation', '12345:55677:123')
+    implementation('12345:55677:123')
+    testImplementation('345:5535:123')
+}

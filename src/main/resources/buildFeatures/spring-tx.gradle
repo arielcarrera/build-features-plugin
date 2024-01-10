@@ -1,0 +1,5 @@
+package buildFeatures
+
+feature('springTx', 'Spring Transaction') {
+    implementation('org.springframework:spring-tx')
+}

@@ -1,0 +1,5 @@
+package buildFeatures
+
+feature('jacksonDatatypeJsr310', 'Jackson Databind JSR-310 (Java 8 date/time)') {
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+}

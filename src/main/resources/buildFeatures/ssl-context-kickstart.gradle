@@ -1,0 +1,5 @@
+package buildFeatures
+
+feature('sslContextKickstart', 'SSL Context Kickstart') {
+    implementation 'io.github.hakky54:sslcontext-kickstart:%SSL_CONTEXT_KICKSTART_VERSION', 'sslcontextKickstartVersion'
+}

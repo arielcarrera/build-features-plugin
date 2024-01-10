@@ -1,0 +1,5 @@
+package buildFeatures
+
+feature('slf4jApi', 'Slf4j Api') {
+    implementation('org.slf4j:slf4j-api')
+}

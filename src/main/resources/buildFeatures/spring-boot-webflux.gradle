@@ -1,0 +1,5 @@
+package buildFeatures
+
+feature('springBootWebflux', 'SpringBoot Webflux') {
+    implementation('org.springframework.boot:spring-boot-starter-webflux')
+}

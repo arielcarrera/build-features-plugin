@@ -1,0 +1,5 @@
+package buildFeatures
+
+feature('apacheCommonsCollections', 'Apache Commons Collections 4') {
+    implementation('org.apache.commons:commons-collections4:%COMMONS_COLLECTIONS_VERSION', 'commonsCollectionsVersion')
+}

@@ -1,0 +1,71 @@
+plugins {
+    id 'com.github.arielcarrera.build.features.boot' version '0.1.0-SNAPSHOT'
+}
+
+group = 'com.github.arielcarrera.build.test'
+version = '2.0.0-SNAPSHOT'
+sourceCompatibility = '17'
+
+ext {
+    //Override versions
+//    set('springCloudVersion', '2022.0.3')
+//    set('awsJavaSdkVersion', '1.12.496')
+    //local dependency versions
+    set('springdocVersion', '2.1.0')
+}
+
+buildFeatures {
+    settings {
+        envFile= ".env"
+        showEnvVars = true
+        secretVariableNames = ['USER']
+        defaultSpringCloudVersion = '2022.0.3'
+        importSpringCloudBomEnabled = true
+        dockerComposeFile = 'compose.yaml'
+        dockerComposeName = 'general'
+        appConfigServiceName = 'app-config'
+        publishEnabled = true
+    }
+    features {
+        enable 'springBootWeb'
+    }
+    features {
+        //Spring
+        enable 'springBootActuator'
+        enable 'springBootDataMongoDb'
+        enable 'springBootDockerComposeSupport'
+        enable 'springBootJersey'
+        enable 'springBootTestSupport'
+        enable 'springBootValidation'
+        enable 'springBootWeb'
+        enable 'springBootWebflux'
+        enable 'springCloudConfig'
+        enable 'springCloudOpenFeign'
+        enable 'springKafka'
+        enable 'springRetry'
+        //Aws
+        enable 'awsCognitoSdk'
+        enable 'awsS3Sdk'
+        //Chaos monkey
+        enable 'chaosMonkeySpringBoot'
+        //Logstash
+        enable 'logstashEncoder'
+        //shedlock
+        enable 'shedlockSpringMongoDb'
+        //openapi
+        enable 'openApi'
+        //Shedlock
+        enable 'shedlockSpringMongoDb'
+    }
+    // optional feature definitions:
+    definitions {
+        feature('newFeature', 'Feature Name 1', 'featureActivationFlag') {
+            implementation('12345:55677:123')
+        }
+    }
+}
+
+dependencies {
+    //Custom dependencies
+    implementation "org.springdoc:springdoc-openapi-starter-webflux-ui:$springdocVersion"
+}

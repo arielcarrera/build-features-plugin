@@ -1,0 +1,5 @@
+package buildFeatures
+
+feature('springBootJson', 'SpringBoot Json') {
+    implementation('org.springframework.boot:spring-boot-starter-json')
+}

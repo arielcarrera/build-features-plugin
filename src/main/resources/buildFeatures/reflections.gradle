@@ -1,0 +1,5 @@
+package buildFeatures
+
+feature('reflections', 'Reflections library') {
+    implementation 'org.reflections:reflections:%REFLECTIONS_VERSION', 'reflectionsVersion'
+}

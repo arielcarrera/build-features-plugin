@@ -1,0 +1,10 @@
+package buildFeatures
+
+feature('chaosMonkeySpringBoot', 'Chaos Monkey Spring Boot') {
+    implementation('de.codecentric:chaos-monkey-spring-boot:%CHAOS_MONKEY_SPRING_BOOT_VERSION', 'chaosMonkeySpringBootVersion') {
+        exclude('org.springframework.boot', null)
+    }
+    implementation('org.springframework.boot:spring-boot-starter-validation')
+    implementation('org.springframework.boot:spring-boot-configuration-processor')
+    implementation('org.springframework.boot:spring-boot-test')
+}

@@ -1,0 +1,10 @@
+package buildFeatures
+
+feature('awsCognitoSdk', 'AWS Cognito SDK') {
+    implementation('com.amazonaws:aws-java-sdk-core:%AWS_JAVA_SDK_VERSION', 'awsJavaSdkVersion') {
+        exclude('commons-logging', 'commons-logging')
+    }
+    implementation('com.amazonaws:aws-java-sdk-cognitoidp:%AWS_JAVA_SDK_VERSION', 'awsJavaSdkVersion') {
+        exclude('commons-logging', 'commons-logging')
+    }
+}

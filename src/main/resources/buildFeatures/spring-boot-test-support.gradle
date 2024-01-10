@@ -1,0 +1,9 @@
+package buildFeatures
+
+feature('springBootTestSupport', 'SpringBoot Test Support') {
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+        exclude group: 'org.ow2.asm', module: 'asm'
+    }
+    testImplementation('org.ow2.asm:asm:%ASM_VERSION', 'asmVersion')
+}

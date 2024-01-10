@@ -1,0 +1,5 @@
+package buildFeatures
+
+feature('apacheCommonsText', 'Apache Commons Text') {
+    implementation('org.apache.commons:commons-text:%COMMONS_TEXT_VERSION', 'commonsTextVersion')
+}

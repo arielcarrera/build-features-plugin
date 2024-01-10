@@ -1,0 +1,5 @@
+package buildFeatures
+
+feature('springContext', 'Spring Context') {
+    implementation('org.springframework:spring-context')
+}

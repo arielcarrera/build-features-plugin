@@ -1,0 +1,5 @@
+package buildFeatures
+
+feature('jakartaBeanValidationApi', 'Jakarta Bean Validation Api') {
+    implementation 'jakarta.validation:jakarta.validation-api'
+}

@@ -1,0 +1,5 @@
+package buildFeatures
+
+feature('logbackAccess', 'Logback Access') {
+    implementation('ch.qos.logback:logback-access:%LOGBACK_ACCESS_VERSION', 'logbackAccessVersion')
+}

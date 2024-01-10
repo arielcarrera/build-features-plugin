@@ -1,0 +1,5 @@
+package buildFeatures
+
+feature('springBootAop', 'SpringBoot AOP') {
+    implementation('org.springframework.boot:spring-boot-starter-aop')
+}

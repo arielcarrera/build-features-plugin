@@ -1,0 +1,5 @@
+package buildFeatures
+
+feature('springBootDockerComposeSupport', 'SpringBoot Docker Compose Support') {
+    dependency('developmentOnly', 'org.springframework.boot:spring-boot-docker-compose')
+}

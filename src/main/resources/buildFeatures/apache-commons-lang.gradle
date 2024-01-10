@@ -1,0 +1,5 @@
+package buildFeatures
+
+feature('apacheCommonsLang', 'Apache Commons Lang 3') {
+    implementation('org.apache.commons:commons-lang3')
+}

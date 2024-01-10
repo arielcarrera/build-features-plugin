@@ -1,0 +1,5 @@
+package buildFeatures
+
+feature('dataFaker', 'Data Faker') {
+    testImplementation 'net.datafaker:datafaker:%DATA_FAKER_VERSION', 'dataFakerVersion'
+}

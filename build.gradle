@@ -1,0 +1,75 @@
+plugins {
+    id 'java-gradle-plugin'
+    id 'maven-publish'
+}
+
+group = 'com.github.arielcarrera.build.features'
+version = '0.1.1'
+description = 'A plugin that helps you to build and run applications composed by a set of build features.'
+sourceCompatibility = '17'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    gradlePluginPortal()
+}
+
+ext {
+    set('springBootVersion', '3.1.3')
+    set('springDependencyManagementVersion', '1.1.3')
+    set('jacocoLogVersion', '3.1.0')
+    set('junitVersion', '5.9.3')
+}
+
+dependencies {
+    compileOnly gradleApi()
+    //Dependency management
+    implementation "org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion"
+    implementation "io.spring.gradle:dependency-management-plugin:$springDependencyManagementVersion"
+    //Jacoco console log
+    implementation "org.barfuin.gradle.jacocolog:org.barfuin.gradle.jacocolog.gradle.plugin:$jacocoLogVersion"
+    // Testing
+    testImplementation "org.junit.jupiter:junit-jupiter:$junitVersion"
+}
+
+gradlePlugin {
+    plugins {
+        springBootBuildFeaturesPlugin {
+            id = 'com.github.arielcarrera.build.features.boot'
+            implementationClass = 'com.github.arielcarrera.build.features.boot.SpringBootBuildFeaturesPlugin'
+            displayName = 'SpringBoot Build Features Plugin'
+            description = 'A plugin that helps to build and run springboot applications composed by a set of build features'
+            tags.addAll('build', 'spring-boot', 'spring-cloud', 'docker', 'feature', 'capability')
+        }
+        libraryBuildFeaturesPlugin {
+            id = 'com.github.arielcarrera.build.features.library'
+            implementationClass = 'com.github.arielcarrera.build.features.library.LibraryBuildFeaturesPlugin'
+            displayName = 'Library Build Features Plugin'
+            description = 'A plugin that helps to build java libraries composed by a set of build features'
+            tags.addAll('build', 'library', 'feature', 'capability')
+        }
+    }
+}
+
+publishing {
+    publications {
+        pluginMaven(org.gradle.api.publish.maven.MavenPublication) {
+            artifactId = "build-features-plugin"
+        }
+    }
+    repositories {
+        maven {
+            def releasesRepoUrl = System.getenv("NEXUS_URL") + 'maven-releases/'
+            def snapshotsRepoUrl = System.getenv("NEXUS_URL") + 'maven-snapshots/'
+            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+            credentials {
+                username System.getenv("NEXUS_USER")
+                password System.getenv("NEXUS_PASS")
+            }
+        }
+    }
+}
+
+test {
+    useJUnitPlatform()
+}

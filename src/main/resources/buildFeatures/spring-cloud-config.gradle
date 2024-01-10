@@ -1,0 +1,5 @@
+package buildFeatures
+
+feature('springCloudConfig', 'Spring Cloud Config') {
+    implementation('org.springframework.cloud:spring-cloud-starter-config')
+}

@@ -1,0 +1,5 @@
+package buildFeatures
+
+feature('springDataRedis', 'Spring Data Redis') {
+    implementation('org.springframework.data:spring-data-redis')
+}

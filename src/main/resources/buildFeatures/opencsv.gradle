@@ -1,0 +1,7 @@
+package buildFeatures
+
+feature('openCsv', 'OpenCsv') {
+    implementation('com.opencsv:opencsv:%OPEN_CSV_VERSION', 'openCsvVersion') {
+        exclude('commons-logging', 'commons-logging')
+    }
+}

@@ -1,0 +1,5 @@
+package buildFeatures
+
+feature('springCloudOpenFeign', 'Spring Cloud OpenFeign') {
+    implementation('org.springframework.cloud:spring-cloud-starter-openfeign')
+}

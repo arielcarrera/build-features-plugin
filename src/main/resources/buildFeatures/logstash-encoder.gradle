@@ -1,0 +1,5 @@
+package buildFeatures
+
+feature('logstashEncoder', 'Logback Logstash Encoder') {
+    implementation('net.logstash.logback:logstash-logback-encoder:%LOGSTASH_LOGBACK_VERSION', 'logbackLogstashVersion')
+}

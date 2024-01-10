@@ -1,0 +1,12 @@
+package buildFeatures
+
+feature('springBootDataOpenSearch', 'SpringBoot Data OpenSearch') {
+    implementation('org.opensearch.client:spring-data-opensearch-starter:%SPRING_DATA_OPENSEARCH_VERSION', 'springDataOpenSearchVersion'){
+        exclude group: 'commons-logging', module: 'commons-logging'
+        exclude group: 'org.slf4j', module: 'slf4j-api'
+    }
+    implementation('org.opensearch.client:spring-data-opensearch:%SPRING_DATA_OPENSEARCH_VERSION', 'springDataOpenSearchVersion'){
+        exclude group: 'commons-logging', module: 'commons-logging'
+        exclude group: 'org.slf4j', module: 'slf4j-api'
+    }
+}

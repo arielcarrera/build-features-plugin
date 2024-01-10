@@ -1,0 +1,5 @@
+package buildFeatures
+
+feature('springBootDataElasticSearch', 'SpringBoot Data ElasticSearch') {
+    implementation('org.springframework.boot:spring-boot-starter-data-elasticsearch')
+}

@@ -1,0 +1,5 @@
+package buildFeatures
+
+feature('joseJwt', 'Nimbus Jose JWT') {
+    implementation "com.nimbusds:nimbus-jose-jwt:%JOSE_JWT_VERSION", 'joseJwtVersion'
+}

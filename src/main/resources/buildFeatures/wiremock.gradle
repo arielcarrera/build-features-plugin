@@ -1,0 +1,8 @@
+package buildFeatures
+
+feature('wireMock', 'Wire Mock') {
+    testImplementation('com.github.tomakehurst:wiremock-jre8-standalone:%WIREMOCK_VERSION', 'wireMockVersion') {
+        exclude group: 'org.ow2.asm', module: 'asm'
+    }
+    testImplementation('org.ow2.asm:asm:%ASM_VERSION', 'asmVersion')
+}

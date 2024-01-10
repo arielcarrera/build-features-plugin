@@ -1,0 +1,5 @@
+package buildFeatures
+
+feature('springKafkaTest', 'Spring KafkaTest') {
+    testImplementation 'org.springframework.kafka:spring-kafka-test'
+}

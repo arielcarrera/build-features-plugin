@@ -1,0 +1,5 @@
+package buildFeatures
+
+feature('apacheCommonsCodec', 'Apache Commons Codec') {
+    implementation('commons-codec:commons-codec')
+}

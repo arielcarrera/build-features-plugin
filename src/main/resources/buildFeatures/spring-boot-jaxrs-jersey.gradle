@@ -1,0 +1,9 @@
+package buildFeatures
+
+feature('springBootJersey', 'SpringBoot JAX-RS Jersey') {
+    implementation('org.springframework.boot:spring-boot-starter-jersey') {
+        exclude('org.javassist:javassist')
+    }
+    implementation('org.springframework.boot:spring-boot-starter-web')
+    implementation('org.javassist:javassist:%JAVASSIST_VERSION', 'javassistVersion')
+}

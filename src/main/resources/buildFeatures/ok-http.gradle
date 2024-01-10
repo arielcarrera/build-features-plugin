@@ -1,0 +1,5 @@
+package buildFeatures
+
+feature('okHttp', 'OkHttp') {
+    implementation 'com.squareup.okhttp3:okhttp'
+}

@@ -1,0 +1,7 @@
+package buildFeatures
+
+feature('awsSdk', 'AWS SDK') {
+    implementation('com.amazonaws:aws-java-sdk:%AWS_JAVA_SDK_VERSION', 'awsJavaSdkVersion') {
+        exclude('commons-logging', 'commons-logging')
+    }
+}

@@ -1,0 +1,5 @@
+package buildFeatures
+
+feature('springBootValidation', 'SpringBoot Validation') {
+    implementation('org.springframework.boot:spring-boot-starter-validation')
+}

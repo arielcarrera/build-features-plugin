@@ -1,0 +1,5 @@
+package buildFeatures
+
+feature('springBootDataMongoDbReactive', 'SpringBoot Data MongoDb Reactive') {
+    implementation('org.springframework.boot:spring-boot-starter-data-mongodb-reactive')
+}

@@ -1,0 +1,5 @@
+package buildFeatures
+
+feature('sendGrid', 'SendGrid') {
+    implementation 'com.sendgrid:sendgrid-java'
+}

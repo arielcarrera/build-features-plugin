@@ -1,0 +1,5 @@
+package buildFeatures
+
+feature('hamcrestCore', 'Hamcrest Core') {
+    testImplementation 'org.hamcrest:hamcrest-core'
+}

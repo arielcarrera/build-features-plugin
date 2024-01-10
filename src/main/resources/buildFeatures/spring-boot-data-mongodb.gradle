@@ -1,0 +1,5 @@
+package buildFeatures
+
+feature('springBootDataMongoDb', 'SpringBoot Data MongoDb') {
+    implementation('org.springframework.boot:spring-boot-starter-data-mongodb')
+}

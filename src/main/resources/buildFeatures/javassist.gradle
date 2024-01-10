@@ -1,0 +1,5 @@
+package buildFeatures
+
+feature('javassist', 'Javassist') {
+    implementation('org.javassist:javassist:%JAVASSIST_VERSION', 'javassistVersion')
+}

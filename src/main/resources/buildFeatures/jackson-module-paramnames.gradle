@@ -1,0 +1,5 @@
+package buildFeatures
+
+feature('jacksonModuleParamNames', 'Jackson Module ParamNames') {
+    implementation 'com.fasterxml.jackson.module:jackson-module-parameter-names'
+}

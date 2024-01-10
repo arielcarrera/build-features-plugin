@@ -1,0 +1,5 @@
+package buildFeatures
+
+feature('kafkaStreams', 'Kafka Streams') {
+    implementation 'org.apache.kafka:kafka-streams:%KAFKA_VERSION', 'kafkaVersion'
+}

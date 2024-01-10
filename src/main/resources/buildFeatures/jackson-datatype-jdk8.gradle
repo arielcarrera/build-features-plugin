@@ -1,0 +1,5 @@
+package buildFeatures
+
+feature('jacksonDatatypeJdk8', 'Jackson Databind JDK8 (java.lang.Optional support)') {
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8'
+}

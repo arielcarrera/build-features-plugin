@@ -1,0 +1,5 @@
+package buildFeatures
+
+feature('springRetry', 'Spring Retry') {
+    implementation('org.springframework.retry:spring-retry')
+}
