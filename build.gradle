@@ -62,8 +62,8 @@ publishing {
     }
     repositories {
         maven {
-            def releasesRepoUrl = System.getenv("NEXUS_URL") + 'maven-releases/'
-            def snapshotsRepoUrl = System.getenv("NEXUS_URL") + 'maven-snapshots/'
+            def releasesRepoUrl = System.env.MAVEN_OSS_REPO_URL ?: (System.getenv("NEXUS_URL") + 'maven-releases/')
+            def snapshotsRepoUrl = System.env.MAVEN_OSS_REPO_URL ?: (System.getenv("NEXUS_URL") + 'maven-snapshots/')
             url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
             credentials {
                 username System.getenv("NEXUS_USER")
