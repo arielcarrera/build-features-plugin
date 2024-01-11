@@ -59,7 +59,30 @@ gradlePlugin {
 publishing {
     publications {
         pluginMaven(org.gradle.api.publish.maven.MavenPublication) {
-            artifactId = "build-features-plugin"
+            artifactId.set("build-features-plugin")
+            pom {
+                name.set("Build Features Plugin")
+                description.set("Build Features Plugin: Gradle plugin for managing dependencies as a platform.")
+                url.set("https://github.com/arielcarrera/build-features-plugin")
+                inceptionYear.set("2023")
+                developers {
+                    developer {
+                        name.set("Ariel Carrera")
+                        email.set("carreraariel@gmail.com")
+                    }
+                }
+                licenses {
+                    license {
+                        name.set("Apache License v2.0")
+                        url.set("https://www.apache.org/licenses/LICENSE-2.0")
+                    }
+                }
+                scm {
+                    url.set("https://github.com/arielcarrera/build-features-plugin")
+                    connection.set("scm:git:git@github.com:arielcarrera/build-features-plugin.git")
+                    developerConnection.set("scm:git:ssh:git@github.com:arielcarrera/build-features-plugin.git")
+                }
+            }
         }
     }
     repositories {
