@@ -59,7 +59,7 @@ gradlePlugin {
 publishing {
     publications {
         pluginMaven(org.gradle.api.publish.maven.MavenPublication) {
-            artifactId.set("build-features-plugin")
+            artifactId = "build-features-plugin"
             pom {
                 name.set("Build Features Plugin")
                 description.set("Build Features Plugin: Gradle plugin for managing dependencies as a platform.")
@@ -105,4 +105,8 @@ signing {
 
 test {
     useJUnitPlatform()
+}
+
+tasks.named("publishPluginMavenPublicationToMavenLocal") {
+    dependsOn 'signArchives'
 }
