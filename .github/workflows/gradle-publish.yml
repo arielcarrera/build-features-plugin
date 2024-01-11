@@ -33,7 +33,8 @@ jobs:
       with:
         arguments: publish
       env:
-        MAVEN_OSS_REPO_URL: https://oss.sonatype.org/service/local/staging/deploy/maven2/
+        MAVEN_OSS_RELEASES_REPO_URL: https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/
+        MAVEN_OSS_SNAPSHOTS_REPO_URL: https://s01.oss.sonatype.org/content/repositories/snapshots/
         NEXUS_USER: ${{ secrets.OSS_SONATYPE_USERNAME }}
         NEXUS_PASS: ${{ secrets.OSS_SONATYPE_TOKEN }}
 

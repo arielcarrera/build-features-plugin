@@ -2,6 +2,7 @@ plugins {
     id 'java-gradle-plugin'
     id 'maven-publish'
     id 'com.gradle.plugin-publish' version '1.2.1'
+    id 'signing'
 }
 
 group = 'io.github.arielcarrera.build.features'
@@ -62,8 +63,8 @@ publishing {
     }
     repositories {
         maven {
-            def releasesRepoUrl = System.env.MAVEN_OSS_REPO_URL ?: (System.getenv("NEXUS_URL") + 'maven-releases/')
-            def snapshotsRepoUrl = System.env.MAVEN_OSS_REPO_URL ?: (System.getenv("NEXUS_URL") + 'maven-snapshots/')
+            def releasesRepoUrl = System.env.MAVEN_OSS_RELEASES_REPO_URL ?: (System.getenv("NEXUS_URL") + 'maven-releases/')
+            def snapshotsRepoUrl = System.env.MAVEN_OSS_SNAPSHOTS_REPO_URL ?: (System.getenv("NEXUS_URL") + 'maven-snapshots/')
             url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
             credentials {
                 username System.getenv("NEXUS_USER")
@@ -71,6 +72,13 @@ publishing {
             }
         }
     }
+}
+
+signing {
+    def signingKey = System.env.SIGNING_KEY
+    def signingPassword = System.env.SIGNING_PASS
+    useInMemoryPgpKeys(signingKey, signingPassword)
+    sign publishing.publications.mavenJava
 }
 
 test {
