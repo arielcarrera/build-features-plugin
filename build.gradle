@@ -107,6 +107,10 @@ test {
     useJUnitPlatform()
 }
 
+tasks.named("publishPluginMavenPublicationToMavenRepository") {
+    dependsOn 'signArchives'
+}
+
 tasks.named("publishPluginMavenPublicationToMavenLocal") {
     dependsOn 'signArchives'
 }
