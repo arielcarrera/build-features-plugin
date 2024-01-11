@@ -147,7 +147,7 @@ Edit the file **build.gradle**:
 
 ```groovy
 plugins {
-    id 'com.github.arielcarrera.build.boot' version '1.0.0'
+    id 'io.github.arielcarrera.build.boot' version '1.0.0'
 }
 ```
 

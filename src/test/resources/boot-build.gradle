@@ -1,8 +1,8 @@
 plugins {
-    id 'com.github.arielcarrera.build.features.boot' version '0.1.0-SNAPSHOT'
+    id 'io.github.arielcarrera.build.features.boot' version '0.2.0-SNAPSHOT'
 }
 
-group = 'com.github.arielcarrera.build.test'
+group = 'io.github.arielcarrera.build.test'
 version = '2.0.0-SNAPSHOT'
 sourceCompatibility = '17'
 

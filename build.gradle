@@ -1,10 +1,11 @@
 plugins {
     id 'java-gradle-plugin'
     id 'maven-publish'
+    id 'com.gradle.plugin-publish' version '1.2.1'
 }
 
-group = 'com.github.arielcarrera.build.features'
-version = '0.2.0-SNAPSHOT'
+group = 'io.github.arielcarrera.build.features'
+version = '0.2.0'
 description = 'A plugin that helps you to build and run applications composed by a set of build features.'
 sourceCompatibility = '17'
 
@@ -33,17 +34,19 @@ dependencies {
 }
 
 gradlePlugin {
+    website = 'https://github.com/arielcarrera/build-features-plugin'
+    vcsUrl = 'https://github.com/arielcarrera/build-features-plugin.git'
     plugins {
         springBootBuildFeaturesPlugin {
-            id = 'com.github.arielcarrera.build.features.boot'
-            implementationClass = 'com.github.arielcarrera.build.features.boot.SpringBootBuildFeaturesPlugin'
+            id = 'io.github.arielcarrera.build.features.boot'
+            implementationClass = 'io.github.arielcarrera.build.features.boot.SpringBootBuildFeaturesPlugin'
             displayName = 'SpringBoot Build Features Plugin'
             description = 'A plugin that helps to build and run springboot applications composed by a set of build features'
             tags.addAll('build', 'spring-boot', 'spring-cloud', 'docker', 'feature', 'capability')
         }
         libraryBuildFeaturesPlugin {
-            id = 'com.github.arielcarrera.build.features.library'
-            implementationClass = 'com.github.arielcarrera.build.features.library.LibraryBuildFeaturesPlugin'
+            id = 'io.github.arielcarrera.build.features.library'
+            implementationClass = 'io.github.arielcarrera.build.features.library.LibraryBuildFeaturesPlugin'
             displayName = 'Library Build Features Plugin'
             description = 'A plugin that helps to build java libraries composed by a set of build features'
             tags.addAll('build', 'library', 'feature', 'capability')
