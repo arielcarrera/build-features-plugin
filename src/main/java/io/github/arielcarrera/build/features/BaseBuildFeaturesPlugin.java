@@ -40,6 +40,7 @@ import org.gradle.api.publish.maven.MavenPublication;
 import org.gradle.api.publish.maven.plugins.MavenPublishPlugin;
 import org.gradle.api.tasks.testing.Test;
 import org.gradle.internal.impldep.org.junit.platform.launcher.Launcher;
+import org.gradle.jvm.toolchain.JavaLanguageVersion;
 import org.gradle.testing.jacoco.plugins.JacocoPlugin;
 import org.gradle.testing.jacoco.tasks.JacocoCoverageVerification;
 import org.gradle.testing.jacoco.tasks.JacocoReport;
@@ -323,16 +324,12 @@ abstract public class BaseBuildFeaturesPlugin<E extends BuildFeaturesExtension> 
     protected void configureConventions() {
         //Set default source compatibility version
         final JavaPluginExtension javaPluginExtension = project.getExtensions().getByType(JavaPluginExtension.class);
-        javaPluginExtension.setSourceCompatibility(17);
-//        javaPluginExtension.getToolchain().getLanguageVersion().set(JavaLanguageVersion.of(17));
-//        project.afterEvaluate(proj -> {
-//            final Property<String> languageVersion = this.extension.getSettings().getJavaVersion();
-//            final JavaLanguageVersion javaLanguageVersion = JavaLanguageVersion.of(languageVersion.getOrElse("17"));
-//            final JavaPluginExtension javaPluginAfterEvaluate = proj.getExtensions().getByType(JavaPluginExtension.class);
-//            javaPluginAfterEvaluate.getToolchain().getLanguageVersion().set(javaLanguageVersion);
-//            String ver = languageVersion.getOrElse("17");
-//            javaPluginAfterEvaluate.setSourceCompatibility(Integer.parseInt(ver));
-//        });
+        project.afterEvaluate(proj -> {
+            final Property<String> languageVersion = this.extension.getSettings().getJavaVersion();
+            final JavaLanguageVersion javaLanguageVersion = JavaLanguageVersion.of(languageVersion.getOrElse("17"));
+            final JavaPluginExtension javaPluginAfterEvaluate = proj.getExtensions().getByType(JavaPluginExtension.class);
+            javaPluginAfterEvaluate.getToolchain().getLanguageVersion().set(javaLanguageVersion);
+        });
     }
 
     /**
