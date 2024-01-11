@@ -63,7 +63,6 @@ import io.spring.gradle.dependencymanagement.org.apache.commons.lang3.StringUtil
  * @param <E> Extension type implementing {@link BuildFeaturesExtension}
  * @author Ariel Carrera
  */
-
 abstract public class BaseBuildFeaturesPlugin<E extends BuildFeaturesExtension> implements Plugin<Project> {
 
     public record FeatureScan(Class<?> clazz, String... paths) {

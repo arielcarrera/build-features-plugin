@@ -44,6 +44,7 @@ class DefaultDependencyHandler implements DependencyHandler {
         this.exclusions.add(new DependencyExclusion(group, name));
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void conditionalOnFeature(String feature) {
         this.conditionalOnFeatureEnabled(feature);

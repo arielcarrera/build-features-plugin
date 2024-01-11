@@ -13,7 +13,7 @@ import org.gradle.api.plugins.ExtraPropertiesExtension;
 import io.github.arielcarrera.build.features.utils.ActionClosure;
 
 /**
- * Manager of Features
+ * Manager of Features.
  *
  * @author Ariel Carrera
  */

@@ -7,6 +7,8 @@ import io.github.arielcarrera.build.features.dependencies.Feature;
 import groovy.lang.Closure;
 
 /**
+ * Extension interface.
+ *
  * @author Ariel Carrera
  */
 public interface BuildFeaturesExtension<S extends SettingsHandler> extends FeatureConfigurationHandler {

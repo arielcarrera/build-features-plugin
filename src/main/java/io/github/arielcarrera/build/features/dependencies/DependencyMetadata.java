@@ -5,12 +5,14 @@ import java.util.Set;
 import org.gradle.api.plugins.ExtraPropertiesExtension;
 
 /**
- * @param configuration
- * @param group
- * @param name
- * @param version
- * @param versionProperty
- * @param excludedDependencies
+ * Dependency Metadata definition.
+ *
+ * @param configuration        the dependency configuration
+ * @param group                the dependency group
+ * @param name                 the dependency name
+ * @param version              the dependency version
+ * @param versionProperty      the property to overwrite dependency version
+ * @param excludedDependencies the transitive dependencies to exclude
  * @param activationCondition  condition for activation/inclusion
  * @author Ariel Carrera
  */

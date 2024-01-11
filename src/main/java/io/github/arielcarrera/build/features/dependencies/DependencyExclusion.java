@@ -1,10 +1,11 @@
 package io.github.arielcarrera.build.features.dependencies;
 
 /**
- * @author Ariel Carrera
+ * Dependency Exclusion data definition.
  *
- * @param group
- * @param name
+ * @param group the dependency group to exclude
+ * @param name  the dependency name to exclude
+ * @author Ariel Carrera
  */
 public record DependencyExclusion(String group, String name) {
     @Override

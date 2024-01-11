@@ -12,7 +12,7 @@ public interface DependencyHandler {
 
     /**
      * Use conditionalOnFeatureEnabled instead.
-     * @param feature
+     * @param feature the feature name
      */
     @Deprecated(since = "0.2.0")
     void conditionalOnFeature(String feature);

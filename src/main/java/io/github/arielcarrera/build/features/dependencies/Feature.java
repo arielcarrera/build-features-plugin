@@ -3,10 +3,12 @@ package io.github.arielcarrera.build.features.dependencies;
 import java.util.Set;
 
 /**
- * @param key
- * @param name
- * @param dependencies
- * @param activationProperty
+ * Feature data definition.
+ *
+ * @param key the feature key/id
+ * @param name the name of the feature
+ * @param dependencies the dependencies included in the feature
+ * @param activationProperty the activation condition/property of the feature
  * @author Ariel Carrera
  */
 public record Feature(String key, String name, Set<DependencyMetadata> dependencies, String activationProperty) {

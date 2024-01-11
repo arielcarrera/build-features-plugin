@@ -13,6 +13,8 @@ import org.gradle.api.InvalidUserDataException;
 import org.gradle.api.logging.Logger;
 
 /**
+ * Registry of features.
+ *
  * @author Ariel Carrera
  */
 public class FeatureRegistry {

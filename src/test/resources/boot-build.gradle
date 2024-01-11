@@ -1,10 +1,15 @@
+import org.gradle.api.JavaVersion
+
 plugins {
     id 'io.github.arielcarrera.build.features.boot' version '0.2.0-SNAPSHOT'
 }
 
 group = 'io.github.arielcarrera.build.test'
 version = '2.0.0-SNAPSHOT'
-sourceCompatibility = '17'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+}
 
 ext {
     //Override versions

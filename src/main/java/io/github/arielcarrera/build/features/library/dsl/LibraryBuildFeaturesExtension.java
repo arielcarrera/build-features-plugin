@@ -5,7 +5,8 @@ import io.github.arielcarrera.build.features.dependencies.FeatureRegistry;
 import io.github.arielcarrera.build.features.dsl.BaseBuildFeaturesExtension;
 
 /**
- * Extension for Library
+ * Extension for the Library plugin.
+ *
  * @author Ariel Carrera
  */
 public abstract class LibraryBuildFeaturesExtension extends BaseBuildFeaturesExtension<LibrarySettingsHandler> {

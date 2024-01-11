@@ -1,4 +1,4 @@
-package io.github.arielcarrera.build.features;
+package com.github.arielcarrera.build.features;
 
 import org.gradle.api.Project;
 import org.gradle.testfixtures.ProjectBuilder;
