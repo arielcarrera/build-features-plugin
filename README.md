@@ -1,4 +1,5 @@
 # build-features-plugin
+
 Gradle plugin for managing dependencies as a platform
 
 # README #
@@ -23,6 +24,15 @@ Feature definition:
 - each dependency has its own version that can be easily overridden by a property
 - each feature can apply conditionals to the inclusion of each dependency based on the existence of other active features
 
+### Plugins ###
+
+There are 2 different plugins, one intended to be used for building services relying on the Spring/SpringBoot stack and other one for
+building libraries.
+
+> For Libraries - Plugin id: 'io.github.arielcarrera.build.library'
+
+> For Services - Plugin id: 'io.github.arielcarrera.build.boot'
+
 ### Build ###
 
 | Command            | Description                                 |
@@ -45,6 +55,28 @@ Feature definition:
 | gradlew listDependencies            | Lists the project dependencies<br/>**Options:**<br/>all : Lists all the dependencies                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | gradlew publishFeatures             | Builds and publishes the build-features project<br/>**Options:**<br/>path=VALUE : Sets the path of the related build features project                                                                                                                                                                                                                                                                                                                                                                              |
 | gradlew publishFeaturesToMavenLocal | Builds and publishes the build-features project to local maven repository<br/>**Options:**<br/>path=VALUE : Sets the path of the related build features project                                                                                                                                                                                                                                                                                                                                                    |
+
+### Bundled Plugins ###
+
+Both plugins, internally includes the following plugins:
+
+1. Java / Java Library
+2. Spring Management Dependencies
+3. Maven Publish
+4. JaCoCo
+5. JaCoCo Log (summary)
+
+The SpringBoot Build Plugin also includes:
+
+1. Spring Boot Plugin
+
+### Repositories ###
+
+By default, the plugin takes the environment variables NEXUS_URL, NEXUS_USER and NEXUS_PASS and creates the maven
+repositories for you.
+If you need to override the repositories you can define your own repository using the following names:
+**releasesRepository** for releases and **snapshotsRepository** for snapshots.
+If the user defined a repository with the same URL, the repository creation is skipped.
 
 ### Managed Versions ###
 
@@ -94,6 +126,8 @@ ext {
 
 ### Plugin Settings ###
 
+> The plugin settings are enclosed in the **buildFeatures** section.
+
 #### Common plugin settings:
 
 | Command                      | Description                              | Default Value | Example               |
@@ -130,7 +164,8 @@ ext {
 
 By default, the build-features-plugin project does not contain any feature definition.
 
-> The feature definitions must be placed locally in the build script or globally managed (as platform) in a child plugin project that extends the build-features-plugin.
+> The feature definitions must be placed locally in the build script or globally managed (as platform) in a child plugin project
+> that extends the build-features-plugin.
 
 ##### Local definition:
 
@@ -148,7 +183,9 @@ By default, the build-features-plugin project does not contain any feature defin
 ```
 
 ##### Global definition:
+
 Custom file in the resource folder of a child project that extends build-features-plugin of content like this:
+
 ````groovy
 package buildFeatures
 
@@ -158,11 +195,12 @@ feature('apacheCommonsIo', 'Apache Commons IO') {
 ````
 
 ##### Feature activation:
+
 Each feature can be enabled/disabled by name in the **features** section. For example:
 
 ```groovy
 features {
-    apacheCommonsIo = true
+    enable 'apacheCommonsIo'
 }
 ```
 
@@ -348,28 +386,28 @@ buildFeatures {
     appConfigServiceName = 'app-config'
     features {
         //Spring
-        springBootActuator = true
-        springBootDataMongoDb = true
-        springBootDockerComposeSupport = true
-        springBootJaxRs = true
-        springBootTestSupport = true
-        springBootValidation = true
-        springBootWeb = true
-        springBootWebflux = true
-        springCloudConfig = true
-        springKafka = true
-        springRetry = true
+        enable 'springBootActuator'
+        enable 'springBootDataMongoDb'
+        enable 'springBootDockerComposeSupport'
+        enable 'springBootJaxRs'
+        enable 'springBootTestSupport'
+        enable 'springBootValidation'
+        enable 'springBootWeb'
+        enable 'springBootWebflux'
+        enable 'springCloudConfig'
+        enable 'springKafka'
+        enable 'springRetry'
         //Aws
-        awsCognito = true
-        awsS3 = true
+        enable 'awsCognito'
+        enable 'awsS3'
         //Chaos Monkey Spring Boot
-        chaosMonkeySpringBoot = true
+        enable 'chaosMonkeySpringBoot'
         //OpenApi
-        openApi = true
+        enable 'openApi'
         //Logstash
-        logstashEncoder = true
+        enable 'logstashEncoder'
         //Shedlock
-        shedlockMongo = true
+        enable 'shedlockMongo'
     }
 }
 ```
@@ -399,8 +437,10 @@ dependencies {
     implementation "org.springdoc:springdoc-openapi-starter-webflux-ui:1.0.0"
 }
 ```
-5. (optional) After adding some new dependencies, you may want to promote them to a feature for easier reuse. In these cases, you can do it manually or you can execute the following steps:
-    1. Export a new feature::
+
+5. (optional) After adding some new dependencies, you may want to promote them to a feature for easier reuse. In these cases, you
+   can do it manually or you can execute the following steps:
+   1. Export a new feature::
    ```shell
     ./gradlew exportFeature --dependency=springdoc --name='springdoc' --r
     
@@ -414,14 +454,66 @@ dependencies {
     implementation('org.springdoc:springdoc-openapi-starter-webflux-ui:%SPRINGDOC_VERSION', 'springdocVersion')
     }
    ```
-    2. Promote feature to features project and build the features project locally:
+   2. Promote feature to features project and build the features project locally:
    ```shell
    ./gradlew buildFeatures --publishToMavenLocal
    ```
-    3. Publish features to remote maven repository:
+   3. Publish features to remote maven repository:
    ```shell
    ./gradlew publishFeatures
    ```
+
+
+### Publishing ###
+
+The publishing is enabled/disabled with the setting *publishEnabled*. If the publishing is enabled, the setting **artifactId** is also
+required.
+
+Example:
+
+```groovy
+buildFeatures {
+    settings {
+        publishEnabled = true
+        artifactId = 'project-name'
+    }
+}
+```
+
+### Test ###
+
+By default, the Junit Platform is executed when at least a test exists.
+
+### Test Coverage / Reporting ###
+
+By default, the test coverage is disabled. It can be enabled using the setting *testCoverageEnabled*.
+
+Configuration example:
+
+```groovy
+buildFeatures {
+    settings {
+        testCoverageEnabled = true
+        testCoverageExclusions = ['**/exception/**']
+        testCoverageMinimumThreshold = 0.4
+    }
+}
+```
+
+### Docker compose support ###
+
+By default, for the SpringBoot Build Plugin, it starts a given Spring Cloud Config container for allowing to the service to
+start with the given configuration.
+
+#### Start App Config manually:
+```shell
+./gradlew runAppConfig
+```
+
+#### Stop App Config manually:
+```shell
+./gradlew stopAppConfig
+```
 
 ### Author
 * Ariel Carrera (carreraariel@gmail.com)
