@@ -11,21 +11,22 @@ The main purpose of this project is:
 - standardize build script
 - reduce complexity and boilerplate in gradle build scripts
 - provide an opinionated solution for centralized dependency management
-- simplify configuration using "features" that can be enabled in the build script
 - simplify configuration of common plugins
 - ease maintenance for updating multiple projects to new dependency versions
-- allow feature definition inline (in the build script) or globally managed in a custom extension/plugin project
-- support management of features with conditional dependencies and exclusions
 - allow dependency resolution with easy version override via property definition
 - improve spring docker-compose support for development, starting spring-cloud-config as needed
 - additional/complementary common gradle tasks
-- works with Spring's dependency-management gradle plugin under the hood for easy dependency resolution and versioning
 - facilitate setting up repositories for snapshots / releases artifacts using environment variables
+
+Additional characteristics:
+- simplify configuration using "features" that can be enabled in the build script
+- allow feature definition inline (in the build script) or globally managed in a custom extension/plugin project
+- support management of features with conditional dependencies and exclusions
+- works with Spring's dependency-management gradle plugin under the hood for easy dependency resolution and versioning
 - include Spring Boot and Spring Cloud BOMs (optionally)
 - different flavors of the plugin for both libraries and spring boot projects
 - support for optional publishing of artifacts to maven repository
 - support for the execution of tests and coverage tests
-
 
 ### Requirements ###
 
