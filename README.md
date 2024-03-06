@@ -8,55 +8,71 @@ This repository contains the gradle Build Features Plugin used to build java pro
 
 The main purpose of this project is:
 
+- standardize build script
+- reduce complexity and boilerplate in gradle build scripts
 - provide an opinionated solution for centralized dependency management
 - simplify configuration using "features" that can be enabled in the build script
-- ensure a minimum set of common configurations/plugins to be applied
-- reduce complexity and boilerplate in gradle build scripts
+- simplify configuration of common plugins
 - ease maintenance for updating multiple projects to new dependency versions
 - allow feature definition inline (in the build script) or globally managed in a custom extension/plugin project
-- provide a simple way to work with spring docker-compose support and spring-cloud-config locally
-- include additional common gradle tasks
+- support management of features with conditional dependencies and exclusions
+- allow dependency resolution with easy version override via property definition
+- improve spring docker-compose support for development, starting spring-cloud-config as needed
+- additional/complementary common gradle tasks
 - works with Spring's dependency-management gradle plugin under the hood for easy dependency resolution and versioning
+- facilitate setting up repositories for snapshots / releases artifacts using environment variables
+- include Spring Boot and Spring Cloud BOMs (optionally)
+- different flavors of the plugin for both libraries and spring boot projects
+- support for optional publishing of artifacts to maven repository
+- support for the execution of tests and coverage tests
 
-Feature definition:
 
-- each feature can contain one or more dependencies
-- each dependency has its own version that can be easily overridden by a property
-- each feature can apply conditionals to the inclusion of each dependency based on the existence of other active features
+### Requirements ###
+
+> You must use gradle 8.5 or higher in current versions, and you must have the plugin repository correctly configured to be able to download the plugin.
+
+Example settings.gradle:
+```groovy
+pluginManagement {
+   repositories {
+      mavenLocal()
+      mavenCentral()
+      maven {
+         url System.getenv("NEXUS_URL") + 'maven-releases/'
+         credentials {
+            username System.getenv("NEXUS_USER")
+            password System.getenv("NEXUS_PASS")
+         }
+         mavenContent {
+            releasesOnly()
+         }
+      }
+      maven {
+         url System.getenv("NEXUS_URL") + 'maven-snapshots/'
+         credentials {
+            username System.getenv("NEXUS_USER")
+            password System.getenv("NEXUS_PASS")
+         }
+         mavenContent {
+            snapshotsOnly()
+         }
+      }
+      gradlePluginPortal()
+   }
+}
+rootProject.name = 'project-name'
+```
 
 ### Plugins ###
 
-There are 2 different plugins, one intended to be used for building services relying on the Spring/SpringBoot stack and other one for
+There are 2 different plugin flavors, one intended to be used for building services relying on the Spring/SpringBoot stack and other one for
 building libraries.
 
 > For Libraries - Plugin id: 'io.github.arielcarrera.build.library'
 
 > For Services - Plugin id: 'io.github.arielcarrera.build.boot'
 
-### Build ###
-
-| Command            | Description                                 |
-|--------------------|---------------------------------------------|
-| make               | Build the artifact and publish the plugin   |
-| make build         | Build the artifact                          |
-| make publish       | Publish artifact to remote Maven Repository |
-| make publish-local | Publish artifact to local Maven Repository  |
-| make clean         | Clean up the project                        |
-| make test          | Run an artifact test using gradlew          |
-| make refresh       | Build the artifact with --refresh-dep param |
-
-### Tasks ###
-
-| Command                             | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | 
-|-------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| gradlew version                     | Gets the artifact/app version                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | 
-| gradlew buildFeatures               | Builds the related build-features project pointed by environment variable BUILD_FEATURES_REPO or property 'buildFeaturePath'.<br/>**Options:**<br/>publish: Indicates if the build-features project is published<br/>publishToMavenLocal : Indicates if the build-features project is published to local maven repository<br/>buildFeaturePath=PATH :  Sets the directory/path of the related build-features project                                                                                           | 
-| gradlew exportFeature               | Generates / exports a feature definition by filtering the list of dependencies by a given text value<br/>**Options:**<br/>dependency=VALUE : Sets a text value for filtering the dependencies to be exported<br/>name=VALUE : Sets the feature name<br/>desc=VALUE : Sets the feature description<br/>property=VALUE : Sets the property name to allow overwriting of the version number<br/>path=VALUE : Sets the path of the related build features project<br/>f : Forces / overrides the output file |
-| gradlew listDependencies            | Lists the project dependencies<br/>**Options:**<br/>all : Lists all the dependencies                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| gradlew publishFeatures             | Builds and publishes the build-features project<br/>**Options:**<br/>path=VALUE : Sets the path of the related build features project                                                                                                                                                                                                                                                                                                                                                                              |
-| gradlew publishFeaturesToMavenLocal | Builds and publishes the build-features project to local maven repository<br/>**Options:**<br/>path=VALUE : Sets the path of the related build features project                                                                                                                                                                                                                                                                                                                                                    |
-
-### Bundled Plugins ###
+### Bundled Gradle Plugins ###
 
 Both plugins, internally includes the following plugins:
 
@@ -72,57 +88,11 @@ The SpringBoot Build Plugin also includes:
 
 ### Repositories ###
 
-By default, the plugin takes the environment variables NEXUS_URL, NEXUS_USER and NEXUS_PASS and creates the maven
-repositories for you.
+By default, the plugin takes the environment variables NEXUS_URL, NEXUS_USER and NEXUS_PASS and creates the maven repositories for you.
 If you need to override the repositories you can define your own repository using the following names:
 **releasesRepository** for releases and **snapshotsRepository** for snapshots.
 If the user defined a repository with the same URL, the repository creation is skipped.
 
-### Managed Versions ###
-
-Spring Boot dependencies are defined by the usage of the Spring Boot gradle plugin and the optional inclusion of the Spring Cloud
-BOM. Although they have a default build-time version, these can be overridden using the following properties:
-
-```groovy
-ext {
-    set('springBootVersion', '3.2.1')
-    set('springDependencyManagementVersion', '1.1.3')
-    set('springCloudVersion', '2023.0.0')
-}
-```
-
-Additional dependencies should be defined in a constants class:
-
-```java
-public final class DefaultVersions {
-    public static final String ASM_VERSION = "9.5";
-    public static final String AWS_JAVA_SDK_VERSION = "1.12.498";
-    public static final String CHAOS_MONKEY_SPRING_BOOT_VERSION = "3.0.1";
-    public static final String JAVASSIST_VERSION = "3.29.2-GA";
-    public static final String LOGSTASH_LOGBACK_VERSION = "7.4";
-    public static final String SHEDLOCK_VERSION = "5.5.0";
-    public static final String SPRING_CLOUD_VERSION = "2022.0.3";
-    public static final String SPRINGDOC_STARTER_VERSION = "2.1.0";
-    public static final String SWAGGER_VERSION = "2.2.12";
-    public static final String ZIPKIN_BRAVE_VERSION = "5.16.0";
-}
-```
-
-Additional dependency versions can be overridden by defining variables in the target project. For example:
-
-```groovy
-ext {
-    set('springCloudVersion', '2022.0.3')
-    set('asmVersion', '9.5')
-    set('awsJavaSdkVersion', '1.12.496')
-    set('chaosMonkeySpringBootVersion', '3.0.1')
-    set('javassistVersion', '3.29.2-GA')
-    set('logbackLogstashVersion', '7.4')
-    set('springdocVersion', '2.1.0')
-    set('swaggerVersion', '2.2.12')
-    set('zipkingVersion', '5.16.0')
-}
-```
 
 ### Plugin Settings ###
 
@@ -162,10 +132,62 @@ ext {
 
 #### Features:
 
+Each feature can be locally or globally defined (under the folder **resources/buildFeatures**).
+
+- each feature can contain one or more dependencies
+- each dependency has its own version that can be easily overridden by a property
+- each feature can apply conditionals to the inclusion of each dependency based on the existence of other active features
+
 By default, the build-features-plugin project does not contain any feature definition.
 
 > The feature definitions must be placed locally in the build script or globally managed (as platform) in a child plugin project
 > that extends the build-features-plugin.
+
+#### Feature definition:
+
+Example:
+```groovy
+package buildFeatures
+
+feature('name', 'desc') {
+    implementation('group:artifact:%ARTIFACT_VERSION', 'versionProperty')
+}
+```
+Where:
+- name: the name of the feature
+- desc: the description of the feature
+- group: the group of the dependency
+- artifact: the name of the dependency
+- ARTIFACT_VERSION: the name of the constant that contains the dependency version
+- versionProperty: the name of the property to be used for version overriding
+- implementation: the configuration to be used (implementation / testImplementation)
+
+
+#### Feature definition with conditional dependencies
+
+Example:
+```groovy
+package buildFeatures
+
+feature('name', 'desc') {
+   implementation('group:artifact:%ARTIFACT_VERSION', 'versionProperty') {
+      conditionalOnFeatureEnabled('springBootJersey')
+   }
+}
+```
+
+#### Feature definition with dependencies and exclusions
+
+Example:
+```groovy
+package buildFeatures
+
+feature('name', 'desc') {
+   implementation('group:artifact:%ARTIFACT_VERSION', 'versionProperty') {
+      exclude('commons-logging', 'commons-logging')
+   }
+}
+```
 
 ##### Local definition:
 
@@ -203,6 +225,88 @@ features {
     enable 'apacheCommonsIo'
 }
 ```
+
+### Managed Versions ###
+
+Spring Boot dependencies are defined by the usage of the Spring Boot gradle plugin and the optional inclusion of the Spring Cloud
+BOM. Although they have a default build-time version, these can be overridden using the following properties:
+
+```groovy
+ext {
+    set('springBootVersion', '3.2.1')
+    set('springDependencyManagementVersion', '1.1.3')
+    set('springCloudVersion', '2023.0.0')
+}
+```
+
+Additional dependencies should be defined in a constants class:
+
+```java
+public final class DefaultVersions {
+    public static final String ASM_VERSION = "9.5";
+    public static final String AWS_JAVA_SDK_VERSION = "1.12.498";
+    public static final String CHAOS_MONKEY_SPRING_BOOT_VERSION = "3.0.1";
+    public static final String JAVASSIST_VERSION = "3.29.2-GA";
+    public static final String LOGSTASH_LOGBACK_VERSION = "7.4";
+    public static final String SHEDLOCK_VERSION = "5.5.0";
+    public static final String SPRING_CLOUD_VERSION = "2022.0.3";
+    public static final String SPRINGDOC_STARTER_VERSION = "2.1.0";
+    public static final String SWAGGER_VERSION = "2.2.12";
+    public static final String ZIPKIN_BRAVE_VERSION = "5.16.0";
+}
+```
+
+#### Verion Overriding
+
+Dependency version can be overridden by defining variables in the target project. For example:
+
+```groovy
+ext {
+    set('springdocVersion', '2.1.0')
+}
+```
+
+#### Local dependencies
+
+Local dependencies can be added locally, like any other SpringBoot project.
+
+Example:
+
+```groovy
+dependencies {
+    //Custom dependency
+   implementation "org.springdoc:springdoc-openapi-starter-webflux-ui:1.0.0"
+}
+```
+
+> Also, it can be exported as a feature with the following command:
+> ./gradlew exportFeature --dependency=springdoc --name='springdoc'
+>
+
+
+### Build ###
+
+| Command            | Description                                 |
+|--------------------|---------------------------------------------|
+| make               | Build the artifact and publish the plugin   |
+| make build         | Build the artifact                          |
+| make publish       | Publish artifact to remote Maven Repository |
+| make publish-local | Publish artifact to local Maven Repository  |
+| make clean         | Clean up the project                        |
+| make test          | Run an artifact test using gradlew          |
+| make refresh       | Build the artifact with --refresh-dep param |
+
+### Tasks ###
+
+| Command                             | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | 
+|-------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| gradlew version                     | Gets the artifact/app version                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | 
+| gradlew buildFeatures               | Builds the related build-features project pointed by environment variable BUILD_FEATURES_REPO or property 'buildFeaturePath'.<br/>**Options:**<br/>publish: Indicates if the build-features project is published<br/>publishToMavenLocal : Indicates if the build-features project is published to local maven repository<br/>buildFeaturePath=PATH :  Sets the directory/path of the related build-features project                                                                                           | 
+| gradlew exportFeature               | Generates / exports a feature definition by filtering the list of dependencies by a given text value<br/>**Options:**<br/>dependency=VALUE : Sets a text value for filtering the dependencies to be exported<br/>name=VALUE : Sets the feature name<br/>desc=VALUE : Sets the feature description<br/>property=VALUE : Sets the property name to allow overwriting of the version number<br/>path=VALUE : Sets the path of the related build features project<br/>f : Forces / overrides the output file |
+| gradlew listDependencies            | Lists the project dependencies<br/>**Options:**<br/>all : Lists all the dependencies                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| gradlew publishFeatures             | Builds and publishes the build-features project<br/>**Options:**<br/>path=VALUE : Sets the path of the related build features project                                                                                                                                                                                                                                                                                                                                                                              |
+| gradlew publishFeaturesToMavenLocal | Builds and publishes the build-features project to local maven repository<br/>**Options:**<br/>path=VALUE : Sets the path of the related build features project                                                                                                                                                                                                                                                                                                                                                    |
+
 
 ### Complementary tasks ###
 
