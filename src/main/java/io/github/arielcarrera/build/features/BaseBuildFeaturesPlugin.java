@@ -25,6 +25,7 @@ import java.util.stream.Collectors;
 
 import org.barfuin.gradle.jacocolog.JacocoLogPlugin;
 import org.gradle.api.InvalidUserDataException;
+import org.gradle.api.JavaVersion;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.Task;
@@ -326,9 +327,13 @@ abstract public class BaseBuildFeaturesPlugin<E extends BuildFeaturesExtension> 
         final JavaPluginExtension javaPluginExtension = project.getExtensions().getByType(JavaPluginExtension.class);
         project.afterEvaluate(proj -> {
             final Property<String> languageVersion = this.extension.getSettings().getJavaVersion();
-            final JavaLanguageVersion javaLanguageVersion = JavaLanguageVersion.of(languageVersion.getOrElse("17"));
+            final String javaVersion = languageVersion.getOrElse("17");
+            final JavaLanguageVersion javaLanguageVersion = JavaLanguageVersion.of(javaVersion);
             final JavaPluginExtension javaPluginAfterEvaluate = proj.getExtensions().getByType(JavaPluginExtension.class);
             javaPluginAfterEvaluate.getToolchain().getLanguageVersion().set(javaLanguageVersion);
+            javaPluginAfterEvaluate.setSourceCompatibility(JavaVersion.valueOf(javaVersion));
+            final String targetJavaVersion = this.extension.getSettings().getTargetJavaVersion().getOrElse(javaVersion);
+            javaPluginAfterEvaluate.setTargetCompatibility(JavaVersion.valueOf(targetJavaVersion));
         });
     }
 

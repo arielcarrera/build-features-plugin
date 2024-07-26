@@ -9,6 +9,8 @@ public interface SettingsHandler {
 
     Property<String> getJavaVersion();
 
+    Property<String> getTargetJavaVersion();
+
     Property<String> getDefaultSpringCloudVersion();
 
     Property<Boolean> getImportSpringCloudBomEnabled();
