@@ -45,9 +45,9 @@ import org.gradle.jvm.toolchain.JavaLanguageVersion;
 import org.gradle.testing.jacoco.plugins.JacocoPlugin;
 import org.gradle.testing.jacoco.tasks.JacocoCoverageVerification;
 import org.gradle.testing.jacoco.tasks.JacocoReport;
-import io.github.arielcarrera.build.features.dsl.BuildFeaturesExtension;
 import io.github.arielcarrera.build.features.dependencies.FeatureManager;
 import io.github.arielcarrera.build.features.dependencies.FeatureRegistry;
+import io.github.arielcarrera.build.features.dsl.BuildFeaturesExtension;
 import io.github.arielcarrera.build.features.tasks.AppVersionTask;
 import io.github.arielcarrera.build.features.tasks.BuildFeaturesTask;
 import io.github.arielcarrera.build.features.tasks.ExportFeatureTask;
@@ -331,9 +331,16 @@ abstract public class BaseBuildFeaturesPlugin<E extends BuildFeaturesExtension> 
             final JavaLanguageVersion javaLanguageVersion = JavaLanguageVersion.of(javaVersion);
             final JavaPluginExtension javaPluginAfterEvaluate = proj.getExtensions().getByType(JavaPluginExtension.class);
             javaPluginAfterEvaluate.getToolchain().getLanguageVersion().set(javaLanguageVersion);
-            javaPluginAfterEvaluate.setSourceCompatibility(JavaVersion.toVersion(javaVersion));
-            final String targetJavaVersion = this.extension.getSettings().getTargetJavaVersion().getOrElse(javaVersion);
-            javaPluginAfterEvaluate.setTargetCompatibility(JavaVersion.toVersion(targetJavaVersion));
+            final JavaVersion sourceVersion = JavaVersion.toVersion(javaVersion);
+            final String targetVersion = this.extension.getSettings().getTargetJavaVersion().getOrElse(javaVersion);
+            javaPluginAfterEvaluate.setTargetCompatibility(JavaVersion.toVersion(targetVersion));
+            if (!javaPluginExtension.getTargetCompatibility().isCompatibleWith(sourceVersion)) {
+                project.getLogger().warn("Source Java language version %s is no compatible with target version %s. Assigning source version=%s"
+                    .formatted(javaVersion, targetVersion, targetVersion));
+                javaPluginAfterEvaluate.setSourceCompatibility(targetVersion);
+            } else {
+                javaPluginAfterEvaluate.setSourceCompatibility(sourceVersion);
+            }
         });
     }
 
