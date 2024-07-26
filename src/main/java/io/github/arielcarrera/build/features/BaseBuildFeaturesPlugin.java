@@ -331,9 +331,9 @@ abstract public class BaseBuildFeaturesPlugin<E extends BuildFeaturesExtension> 
             final JavaLanguageVersion javaLanguageVersion = JavaLanguageVersion.of(javaVersion);
             final JavaPluginExtension javaPluginAfterEvaluate = proj.getExtensions().getByType(JavaPluginExtension.class);
             javaPluginAfterEvaluate.getToolchain().getLanguageVersion().set(javaLanguageVersion);
-            javaPluginAfterEvaluate.setSourceCompatibility(JavaVersion.valueOf(javaVersion));
+            javaPluginAfterEvaluate.setSourceCompatibility(JavaVersion.toVersion(javaVersion));
             final String targetJavaVersion = this.extension.getSettings().getTargetJavaVersion().getOrElse(javaVersion);
-            javaPluginAfterEvaluate.setTargetCompatibility(JavaVersion.valueOf(targetJavaVersion));
+            javaPluginAfterEvaluate.setTargetCompatibility(JavaVersion.toVersion(targetJavaVersion));
         });
     }
 
