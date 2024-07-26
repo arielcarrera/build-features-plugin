@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'io.github.arielcarrera.build.features'
-version = '0.2.0'
+version = '0.3.0'
 description = 'A plugin that helps you to build and run applications composed by a set of build features.'
 
 java {
